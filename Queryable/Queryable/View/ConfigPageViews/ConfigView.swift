@@ -13,7 +13,10 @@ struct ConfigView: View {
     @State var showCrashReportText: Bool = false
     @State var showCleanCache: Bool = false
     @State var showTOPK_SIMSlider: Bool = false
+    @State var showImageList: Bool = false
+    @State var showVoiceImageSearch:Bool = false
     @EnvironmentObject var photoSearcher: PhotoSearcher
+    //use to control display number of results
     @State private var sliderValue: Double = 120
 
     var body: some View {
@@ -22,7 +25,9 @@ struct ConfigView: View {
                 Section(header: Text("User Guide and Feedback")) {
                     Label("About Queryable", systemImage: "book")
                         .onTapGesture {
+                            //add animation
                             withAnimation {
+                                //toggle -> swich value false ->true true -> false
                                 showAboutText.toggle()
                             }
                         }
@@ -84,6 +89,32 @@ struct ConfigView: View {
 
                 }
 
+                Section(header: Text("Featrue todo list"), content: {
+                    Label("image list view", systemImage: "books.vertical.fill")
+                        .onTapGesture {
+                            //add animation
+                            withAnimation {
+                                showImageList.toggle()
+                            }
+                        }
+                    if showImageList {
+                        Text("use sqlLite to manage your indexed image,pleae wait")
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Label("voice image search", systemImage: "record.circle")
+                        .onTapGesture {
+                            //add animation
+                            withAnimation {
+                                showVoiceImageSearch.toggle()
+                            }
+                        }
+                    if showVoiceImageSearch {
+                        Text("use whisper to do image search")
+                            .foregroundColor(.gray)
+                    }
+                })
+                
                 Section(header: Text("Feedback")) {
                     Link(destination: URL(string: NSLocalizedString("https://discord.com/invite/R3wNsqq3v5", comment: "Discord URL"))!, label: {
                         
@@ -140,6 +171,8 @@ struct ConfigView: View {
                     
                 }
                 
+   
+                
                 Section(header: Text("More App by This Developer")) {
                     Link(destination: URL(string: NSLocalizedString("https://apps.apple.com/us/app/do-not-type/id6449760006", comment: "DoNotType app URL"))!, label: {
                         
@@ -190,6 +223,7 @@ struct ConfigView: View {
                     .foregroundColor(Color.primary)
                 }
                     
+            
 
             }
         }.onAppear {
@@ -201,6 +235,6 @@ struct ConfigView: View {
 
 struct ConfigView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigView()
+        ConfigView().environmentObject(PhotoSearcher())
     }
 }

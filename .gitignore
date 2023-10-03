@@ -1,1 +1,3 @@
 .DS_Store
+Queryable/Queryable/CoreMLModels/ImageEncoder_float32.mlmodelc/
+Queryable/Queryable/CoreMlModels/TextEncoder_float32.mlmodelc/

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    //is go to index view default is false
     @State private var goToIndexView = false
+    //when photoSearcher change its porperty this view will be rebuild
     @ObservedObject var photoSearcher = PhotoSearcher()
     
     var body: some View {
